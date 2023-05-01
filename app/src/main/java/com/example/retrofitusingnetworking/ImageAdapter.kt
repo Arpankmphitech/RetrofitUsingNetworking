@@ -19,23 +19,16 @@ class ImageAdapter(var imageList: List<ImageItem>, var applicationContext: Conte
         var updatedAt = itemView.findViewById<TextView>(R.id.txtUpdatedAt)
         var createdAt = itemView.findViewById<TextView>(R.id.txtCreatedAt)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.image_item, parent, false)
-
         return ViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         Glide.with(applicationContext).load(imageList[position].name).into(holder.imageView)
         holder.updatedAt.text = imageList[position].updatedAt
         holder.createdAt.text = imageList[position].createdAt
-
     }
-
     override fun getItemCount(): Int {
         return imageList.size
     }

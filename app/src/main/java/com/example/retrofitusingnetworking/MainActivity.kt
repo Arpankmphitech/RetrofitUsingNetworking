@@ -36,12 +36,29 @@ class MainActivity : AppCompatActivity() {
 
 //      initView()
 
-        apiCall()
+//        apiCall()
+
+        retrofitApiCalling()
+    }
+
+    private fun retrofitApiCalling() {
+        val imageApi = RetrofitHelper.getInstance().create(ImageApi::class.java)
+        GlobalScope.launch {
+            val response = imageApi.getWallPaper()
+            imageList = response.image as ArrayList<ImageItem>
+            runOnUiThread {
+                val adapterImage = ImageAdapter(imageList!!, applicationContext)
+                binding.rcvImage.setLayoutManager(LinearLayoutManager(applicationContext))
+                binding.rcvImage.adapter = adapterImage
+            }
+
+        }
     }
 
     private fun apiCall() {
         lifecycleScope.launch(Dispatchers.IO) {
             val apiUrl = "https://appkiduniya.in/wallpaper/Api/User/getwallpaper"
+
             var jsonObjectRequest = JsonObjectRequest(Request.Method.GET, apiUrl, null, {
 
                 try {
@@ -53,8 +70,7 @@ class MainActivity : AppCompatActivity() {
                         val created_at = obj.getString("created_at")
                         val updated_at = obj.getString("updated_at")
 
-                        val imageItem =
-                            ImageItem(updated_at, name, created_at, walpapper_id)
+                        val imageItem = ImageItem(updated_at, name, created_at, walpapper_id)
                         imageList.add(imageItem)
                     }
 

@@ -2,7 +2,7 @@ package com.example.retrofitusingnetworking
 
 import com.google.gson.annotations.SerializedName
 
-data class Response(
+data class Response<T>(
 
 	@field:SerializedName("ResponseCode")
 	val responseCode: Int? = null,

@@ -8,13 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.chrisbanes.photoview.PhotoView
 
 class ImageAdapter(var imageList: List<ImageItem>, var applicationContext: Context) :
     RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
 
-        var imageView = itemView.findViewById<ImageView>(R.id.imgWallpaper)
+        var imageView = itemView.findViewById<PhotoView>(R.id.imgWallpaper)
         var updatedAt = itemView.findViewById<TextView>(R.id.txtUpdatedAt)
         var createdAt = itemView.findViewById<TextView>(R.id.txtCreatedAt)
     }
